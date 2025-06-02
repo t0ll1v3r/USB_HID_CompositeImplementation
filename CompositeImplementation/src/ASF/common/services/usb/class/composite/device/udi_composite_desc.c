@@ -109,7 +109,7 @@ COMPILER_PACK_RESET()
 
 //! USB Device Configuration Descriptor filled for FS
 COMPILER_WORD_ALIGNED
-UDC_DESC_STORAGE udc_desc_t udc_desc_fs = {
+UDC_DESC_STORAGE udc_desc_t udc_desc = {
 	.conf.bLength              = sizeof(usb_conf_desc_t),
 	.conf.bDescriptorType      = USB_DT_CONFIGURATION,
 	.conf.wTotalLength         = LE16(sizeof(udc_desc_t)),
@@ -121,21 +121,21 @@ UDC_DESC_STORAGE udc_desc_t udc_desc_fs = {
 	UDI_COMPOSITE_DESC_FS
 };
 
-#ifdef USB_DEVICE_HS_SUPPORT
-//! USB Device Configuration Descriptor filled for HS
-COMPILER_WORD_ALIGNED
-UDC_DESC_STORAGE udc_desc_t udc_desc_hs = {
-	.conf.bLength              = sizeof(usb_conf_desc_t),
-	.conf.bDescriptorType      = USB_DT_CONFIGURATION,
-	.conf.wTotalLength         = LE16(sizeof(udc_desc_t)),
-	.conf.bNumInterfaces       = USB_DEVICE_NB_INTERFACE,
-	.conf.bConfigurationValue  = 1,
-	.conf.iConfiguration       = 0,
-	.conf.bmAttributes         = USB_CONFIG_ATTR_MUST_SET | USB_DEVICE_ATTR,
-	.conf.bMaxPower            = USB_CONFIG_MAX_POWER(USB_DEVICE_POWER),
-	UDI_COMPOSITE_DESC_HS
-};
-#endif
+// #ifdef USB_DEVICE_HS_SUPPORT
+// //! USB Device Configuration Descriptor filled for HS
+// COMPILER_WORD_ALIGNED
+// UDC_DESC_STORAGE udc_desc_t udc_desc_hs = {
+// 	.conf.bLength              = sizeof(usb_conf_desc_t),
+// 	.conf.bDescriptorType      = USB_DT_CONFIGURATION,
+// 	.conf.wTotalLength         = LE16(sizeof(udc_desc_t)),
+// 	.conf.bNumInterfaces       = USB_DEVICE_NB_INTERFACE,
+// 	.conf.bConfigurationValue  = 1,
+// 	.conf.iConfiguration       = 0,
+// 	.conf.bmAttributes         = USB_CONFIG_ATTR_MUST_SET | USB_DEVICE_ATTR,
+// 	.conf.bMaxPower            = USB_CONFIG_MAX_POWER(USB_DEVICE_POWER),
+// 	UDI_COMPOSITE_DESC_HS
+// };
+// #endif
 
 
 /**
@@ -148,19 +148,19 @@ UDC_DESC_STORAGE udi_api_t *udi_apis[USB_DEVICE_NB_INTERFACE] = {
 	UDI_COMPOSITE_API
 };
 
-//! Add UDI with USB Descriptors FS
+//! Add UDI with USB Descriptors FS (& HS)
 UDC_DESC_STORAGE udc_config_speed_t   udc_config_lsfs[1] = {{
-	.desc          = (usb_conf_desc_t UDC_DESC_STORAGE*)&udc_desc_fs,
+	.desc          = (usb_conf_desc_t UDC_DESC_STORAGE*)&udc_desc,
 	.udi_apis      = udi_apis,
 }};
 
-#ifdef USB_DEVICE_HS_SUPPORT
-//! Add UDI with USB Descriptors HS
-UDC_DESC_STORAGE udc_config_speed_t   udc_config_hs[1] = {{
-	.desc          = (usb_conf_desc_t UDC_DESC_STORAGE*)&udc_desc_hs,
-	.udi_apis      = udi_apis,
-}};
-#endif
+// #ifdef USB_DEVICE_HS_SUPPORT
+// //! Add UDI with USB Descriptors HS
+// UDC_DESC_STORAGE udc_config_speed_t   udc_config_hs[1] = {{
+// 	.desc          = (usb_conf_desc_t UDC_DESC_STORAGE*)&udc_desc_hs,
+// 	.udi_apis      = udi_apis,
+// }};
+// #endif
 
 //! Add all information about USB Device in global structure for UDC
 UDC_DESC_STORAGE udc_config_t udc_config = {

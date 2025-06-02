@@ -37,23 +37,38 @@
 #ifndef _UDI_COMPOSITE_CONF_H_
 #define _UDI_COMPOSITE_CONF_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+
 #define USB_DEVICE_NB_INTERFACE	2	// total # of interfaces in comoposite device
 
 // #undef USB_DEVICE_MAX_EP
 #define USB_DEVICE_MAX_EP		1	// highest EP # used in firmware
 
 
-#ifdef USB_DEVICE_HS_SUPPORT
-#  define USB_DEVICE_EP_CTRL_SIZE 64
-#else
-#  define USB_DEVICE_EP_CTRL_SIZE 8
-#endif
+// #ifdef USB_DEVICE_HS_SUPPORT
+// #  define USB_DEVICE_EP_CTRL_SIZE 64
+// #else
+// #  define USB_DEVICE_EP_CTRL_SIZE 8
+// #endif
 
-#define UDI_HID_GENERIC_EP_OUT	(2 | USB_EP_DIR_OUT)
+#define  USB_DEVICE_EP_CTRL_SIZE    8 
+
+
+#define UDI_HID_KBD_EP_IN (2 | USB_EP_DIR_IN)
 #define UDI_HID_GENERIC_EP_IN	(1 | USB_EP_DIR_IN)
 
 #define UDI_HID_GENERIC_IFACE_NUMBER 0
 
 
+#ifdef __cplusplus
+}
+#endif
+
+
+#include "udi_hid_kbd.h"
+#include "udi_hid_generic.h"
 
 #endif // _UDI_COMPOSITE_CONF_H_

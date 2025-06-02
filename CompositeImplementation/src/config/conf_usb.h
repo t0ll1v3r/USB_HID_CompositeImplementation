@@ -93,8 +93,9 @@
 /* ------------------------------------------------------------------------
  * ------------- Bring in each UDI’s individual config header -------------
  * ----------------------------------------------------------------------*/
-#include "udi_hid_kbd_conf.h"
-#include "udi_hid_generic_conf.h"
+// #include "udi_hid_kbd_conf.h"
+// #include "udi_hid_generic_conf.h"
+#include "udi_composite_conf.h"
 #include "main.h"
 #include "ui.h"          /* joystick helpers */
 #include "76319_ui.h"    /* keyboard helpers */
