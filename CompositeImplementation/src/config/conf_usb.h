@@ -96,10 +96,10 @@
  * @{
  */
 // //! Endpoint numbers definition
-// #define  UDI_HID_KBD_EP_IN           (2 | USB_EP_DIR_IN)
+#define  UDI_HID_KBD_EP_IN           (1 | USB_EP_DIR_IN)
 
 // //! Interface number
-// #define  UDI_HID_KBD_IFACE_NUMBER    0
+#define  UDI_HID_KBD_IFACE_NUMBER    0
 
 		
 /* ------------------------------------------------------------------------
@@ -113,14 +113,14 @@
 #define  UDI_HID_REPORT_OUT_SIZE            0
 #define  UDI_HID_REPORT_FEATURE_SIZE        0
 
-//! Sizes of I/O endpoints
-#define  UDI_HID_GENERIC_EP_SIZE            8
+// // ! Sizes of I/O endpoints
+// #define  UDI_HID_GENERIC_EP_SIZE            8
 
-// //! Endpoint numbers definition
-// #define  UDI_HID_GENERIC_EP_IN    (1 | USB_EP_DIR_IN)
+//! Endpoint numbers definition
+#define  UDI_HID_GENERIC_EP_IN    (2 | USB_EP_DIR_IN)
 
 //! Interface number
-// #define  UDI_HID_GENERIC_IFACE_NUMBER    1
+#define  UDI_HID_GENERIC_IFACE_NUMBER    1
 
 
 /* ------------------------------------------------------------------------
@@ -142,11 +142,11 @@
 	&udi_api_hid_kbd, \
 	&udi_api_hid_generic
 
-// #define  USB_DEVICE_EP_CTRL_SIZE       8 // control endpoint size
+#define  USB_DEVICE_EP_CTRL_SIZE       8 // control endpoint size
 #define  USB_DEVICE_NB_INTERFACE       2 // # of interfaces (1 or more)
 
-// #undef USB_DEVICE_MAX_EP   // undefine this definition in header file
-// #define  USB_DEVICE_MAX_EP    1	// changed from 2 -> 1 by UniWest
+#undef USB_DEVICE_MAX_EP   // undefine this definition in header file
+#define  USB_DEVICE_MAX_EP    2	// changed from 2 -> 1 by UniWest
 
 /* ------------------------------------------------------------------------
  * ------------------- USB Device Driver Configuration --------------------
