@@ -91,32 +91,48 @@ static bool udi_hid_generic_b_report_in_free;
 COMPILER_WORD_ALIGNED
 		static uint8_t udi_hid_generic_report_in[UDI_HID_REPORT_IN_SIZE];
 //! Report to receive
-// COMPILER_WORD_ALIGNED
-// 		static uint8_t udi_hid_generic_report_out[UDI_HID_REPORT_OUT_SIZE];
+COMPILER_WORD_ALIGNED
+		static uint8_t udi_hid_generic_report_out[UDI_HID_REPORT_OUT_SIZE];
 //! Report to receive via SetFeature
 COMPILER_WORD_ALIGNED
 		static uint8_t udi_hid_generic_report_feature[UDI_HID_REPORT_FEATURE_SIZE];
 
 //@}
 
-//! HID report descriptor for HID Joystick, modified by UniWest
+//! HID report descriptor for standard HID generic
 UDC_DESC_STORAGE udi_hid_generic_report_desc_t udi_hid_generic_report_desc = { {
-	0x05, 0x01,				/* Usage Page (Generic Desktop)	*/
-	0x09, 0x04,				/* Usage (Joystick)				*/
-	0xA1, 0x01,				/* Collection (Application)		*/
-	  0xA1, 0x00,			/* Collection (Physical)		*/
-		0x05, 0x01,			/* Usage Page (Generic Desktop)	*/
-		0x09, 0x30, 		/* Usage (X)					*/
-		0x09, 0x31,			/* Usage (Y)					*/
-		0x15, 0x00,			/* Logical Minimum (0)			*/
-		0x26, 0xFF, 0x00,	/* Logical Maximum (255)		*/
-		0x75, 0x08,			/* Report Size (8 bits)			*/
-		0x95, 0x02,			/* Report Count (2 → X & Y)		*/
-		0x81, 0x02,			/* Input (Data,Var,Abs)			*/
-	  0xC0,					/* End Collection				*/
-	0xC0					/* End Collection				*/
+				0x06, 0xFF, 0xFF,	// 04|2   , Usage Page (vendor defined?)
+				0x09, 0x01,	// 08|1   , Usage      (vendor defined
+				0xA1, 0x01,	// A0|1   , Collection (Application)
+				// IN report
+				0x09, 0x02,	// 08|1   , Usage      (vendor defined)
+				0x09, 0x03,	// 08|1   , Usage      (vendor defined)
+				0x15, 0x00,	// 14|1   , Logical Minimum(0 for signed byte?)
+				0x26, 0xFF, 0x00,	// 24|1   , Logical Maximum(255 for signed byte?)
+				0x75, 0x08,	// 74|1   , Report Size(8) = field size in bits = 1 byte
+				// 94|1   , ReportCount(size) = repeat count of previous item
+				0x95, sizeof(udi_hid_generic_report_in),
+				0x81, 0x02,	// 80|1   , IN report (Data,Variable, Absolute)
+				// OUT report
+				0x09, 0x04,	// 08|1   , Usage      (vendor defined)
+				0x09, 0x05,	// 08|1   , Usage      (vendor defined)
+				0x15, 0x00,	// 14|1   , Logical Minimum(0 for signed byte?)
+				0x26, 0xFF, 0x00,	// 24|1   , Logical Maximum(255 for signed byte?)
+				0x75, 0x08,	// 74|1   , Report Size(8) = field size in bits = 1 byte
+				// 94|1   , ReportCount(size) = repeat count of previous item
+				0x95, sizeof(udi_hid_generic_report_out),
+				0x91, 0x02,	// 90|1   , OUT report (Data,Variable, Absolute)
+				// Feature report
+				0x09, 0x06,	// 08|1   , Usage      (vendor defined)
+				0x09, 0x07,	// 08|1   , Usage      (vendor defined)
+				0x15, 0x00,	// 14|1   , LogicalMinimum(0 for signed byte)
+				0x26, 0xFF, 0x00,	// 24|1   , Logical Maximum(255 for signed byte)
+				0x75, 0x08,	// 74|1   , Report Size(8) =field size in bits = 1 byte
+				0x95, sizeof(udi_hid_generic_report_feature),	// 94|x   , ReportCount in byte
+				0xB1, 0x02,	// B0|1   , Feature report
+				0xC0	// C0|0   , End Collection
 		}
-};	// array modified by UniWest
+};
 
 /**
  * \name Internal routines
@@ -141,15 +157,15 @@ static void udi_hid_generic_setfeature_valid(void);
  * \param status     UDD_EP_TRANSFER_ABORT, if transfer is aborted
  * \param nb_sent    number of data received
  */
-// static void udi_hid_generic_report_out_received(udd_ep_status_t status,
-// 		iram_size_t nb_received, udd_ep_id_t ep);
+static void udi_hid_generic_report_out_received(udd_ep_status_t status,
+		iram_size_t nb_received, udd_ep_id_t ep);
 
 /**
  * \brief Enable reception of out report
  *
  * \return \c 1 if function was successfully done, otherwise \c 0.
  */
-// static bool udi_hid_generic_report_out_enable(void);
+static bool udi_hid_generic_report_out_enable(void);
 
 /**
  * \brief Callback called when the report is sent
@@ -173,8 +189,8 @@ bool udi_hid_generic_enable(void)
 	udi_hid_generic_rate = 0;
 	udi_hid_generic_protocol = 0;
 	udi_hid_generic_b_report_in_free = true;
-	// if (!udi_hid_generic_report_out_enable())
-	// 	return false;
+	if (!udi_hid_generic_report_out_enable())
+		return false;
 	return UDI_HID_GENERIC_ENABLE_EXT();
 }
 
@@ -248,31 +264,31 @@ static void udi_hid_generic_setfeature_valid(void)
 {
 	if (sizeof(udi_hid_generic_report_feature) != udd_g_ctrlreq.payload_size)
 		return;	// Bad data
-	// UDI_HID_GENERIC_SET_FEATURE(udi_hid_generic_report_feature);
+	UDI_HID_GENERIC_SET_FEATURE(udi_hid_generic_report_feature);
 }
 
-// static void udi_hid_generic_report_out_received(udd_ep_status_t status,
-// 		iram_size_t nb_received, udd_ep_id_t ep)
-// {
-// 	UNUSED(ep);
-// 	if (UDD_EP_TRANSFER_OK != status)
-// 		return;	// Abort reception
+static void udi_hid_generic_report_out_received(udd_ep_status_t status,
+		iram_size_t nb_received, udd_ep_id_t ep)
+{
+	UNUSED(ep);
+	if (UDD_EP_TRANSFER_OK != status)
+		return;	// Abort reception
 
-// 	if (sizeof(udi_hid_generic_report_out) == nb_received) {
-// 		UDI_HID_GENERIC_REPORT_OUT(udi_hid_generic_report_out);
-// 	}
-// 	udi_hid_generic_report_out_enable();
-// }
+	if (sizeof(udi_hid_generic_report_out) == nb_received) {
+		UDI_HID_GENERIC_REPORT_OUT(udi_hid_generic_report_out);
+	}
+	udi_hid_generic_report_out_enable();
+}
 
 
-// static bool udi_hid_generic_report_out_enable(void)
-// {
-// 	return udd_ep_run(UDI_HID_GENERIC_EP_OUT,
-// 							false,
-// 							(uint8_t *) & udi_hid_generic_report_out,
-// 							sizeof(udi_hid_generic_report_out),
-// 							udi_hid_generic_report_out_received);
-// }
+static bool udi_hid_generic_report_out_enable(void)
+{
+	return udd_ep_run(UDI_HID_GENERIC_EP_OUT,
+							false,
+							(uint8_t *) & udi_hid_generic_report_out,
+							sizeof(udi_hid_generic_report_out),
+							udi_hid_generic_report_out_received);
+}
 
 
 static void udi_hid_generic_report_in_sent(udd_ep_status_t status,
