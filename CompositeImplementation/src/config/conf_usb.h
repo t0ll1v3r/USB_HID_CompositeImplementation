@@ -101,15 +101,6 @@
 // //! Interface number
 // #define  UDI_HID_KBD_IFACE_NUMBER    0
 
-/* ------------------------------------------------------------------------
- * ------------------- USB Device Driver Configuration --------------------
- * ----------------------------------------------------------------------*/
-#include "udi_composite_conf.h"
-#include "main.h"
-
-// #include "ui.h"
-#include "76319_ui.h"
-
 		
 /* ------------------------------------------------------------------------
  * -------------------  HID-JOYSTICK interface settings -------------------
@@ -156,6 +147,15 @@
 
 // #undef USB_DEVICE_MAX_EP   // undefine this definition in header file
 // #define  USB_DEVICE_MAX_EP    1	// changed from 2 -> 1 by UniWest
+
+/* ------------------------------------------------------------------------
+ * ------------------- USB Device Driver Configuration --------------------
+ * ----------------------------------------------------------------------*/
+#include "udi_composite_conf.h"
+#include "main.h"
+
+// #include "ui.h"
+#include "76319_ui.h"
 
 
 #endif // _CONF_USB_H_
