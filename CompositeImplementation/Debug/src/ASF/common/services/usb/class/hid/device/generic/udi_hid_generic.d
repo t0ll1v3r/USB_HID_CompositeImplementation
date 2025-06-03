@@ -1,6 +1,6 @@
-src/ASF/common/services/usb/class/hid/device/udi_hid.d \
- src/ASF/common/services/usb/class/hid/device/udi_hid.o: \
- ../src/ASF/common/services/usb/class/hid/device/udi_hid.c \
+src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.d \
+ src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.o: \
+ ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.c \
  ../src/config/conf_usb.h ../src/ASF/xmega/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -43,7 +43,9 @@ src/ASF/common/services/usb/class/hid/device/udi_hid.d \
  ../src/ASF/common/services/usb/udc/udc_desc.h \
  ../src/ASF/common/services/usb/udc/udc.h \
  ../src/ASF/common/services/usb/udc/udd.h \
- ../src/ASF/common/services/usb/class/hid/device/udi_hid.h
+ ../src/ASF/common/services/usb/class/hid/device/udi_hid.h \
+ ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h
 
 ../src/config/conf_usb.h:
 
@@ -136,3 +138,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../src/ASF/common/services/usb/udc/udd.h:
 
 ../src/ASF/common/services/usb/class/hid/device/udi_hid.h:
+
+../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:

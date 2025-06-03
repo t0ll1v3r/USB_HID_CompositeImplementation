@@ -37,4 +37,19 @@
 #ifndef _UDI_COMPOSITE_CONF_H_
 #define _UDI_COMPOSITE_CONF_H_
 
+#define  USB_DEVICE_EP_CTRL_SIZE  8 // control endpoint size
+
+//! Endpoint numbers definition
+#define  UDI_HID_KBD_EP_IN        (2 | USB_EP_DIR_IN)
+#define  UDI_HID_GENERIC_EP_IN    (1 | USB_EP_DIR_IN)
+
+//! Interface number
+#define  UDI_HID_KBD_IFACE_NUMBER      0
+#define  UDI_HID_GENERIC_IFACE_NUMBER  1
+
+#define  USB_DEVICE_MAX_EP             2
+
+#include "udi_hid_generic.h"
+#include "udi_hid_kbd.h"
+
 #endif // _UDI_COMPOSITE_CONF_H_

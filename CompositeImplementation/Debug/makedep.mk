@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\76319_ui.c
+
 src\ASF\common\services\sleepmgr\xmega\sleepmgr.c
 
 src\ASF\common\services\clock\xmega\sysclk.c
