@@ -54,13 +54,19 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/common/services/clock/xmega/pll.h \
  ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h \
  ../src/config/conf_usb.h \
+ ../src/ASF/common/services/usb/class/composite/device/udi_composite_conf.h \
+ ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd_conf.h \
  ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
  ../src/ASF/common/services/usb/usb_protocol.h \
  ../src/ASF/common/services/usb/usb_atmel.h \
  ../src/ASF/common/services/usb/class/hid/usb_protocol_hid.h \
  ../src/ASF/common/services/usb/udc/udc_desc.h \
  ../src/ASF/common/services/usb/udc/udi.h \
- ../src/ASF/common/services/usb/udc/udi.h ../src/main.h ../src/76319_ui.h \
+ ../src/ASF/common/services/usb/udc/udi.h \
+ ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic_conf.h \
+ ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h \
+ ../src/main.h ../src/76319_ui.h \
+ ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
  ../src/ASF/common/services/usb/udc/udc.h \
  ../src/ASF/common/services/usb/udc/udc_desc.h \
  ../src/ASF/common/services/usb/udc/udd.h \
@@ -184,6 +190,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../src/config/conf_usb.h:
 
+../src/ASF/common/services/usb/class/composite/device/udi_composite_conf.h:
+
+../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd_conf.h:
+
 ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h:
 
 ../src/ASF/common/services/usb/usb_protocol.h:
@@ -198,9 +208,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../src/ASF/common/services/usb/udc/udi.h:
 
+../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic_conf.h:
+
+../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h:
+
 ../src/main.h:
 
 ../src/76319_ui.h:
+
+../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h:
 
 ../src/ASF/common/services/usb/udc/udc.h:
 

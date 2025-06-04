@@ -1,7 +1,8 @@
 /**
  * \file
  *
- * \brief Descriptors for an USB Composite Device MSC and HID mouse
+ * \brief Default HID keyboard configuration for a USB Device
+ * with a single interface HID keyboard
  *
  * Copyright (c) 2009-2018 Microchip Technology Inc. and its subsidiaries.
  *
@@ -34,44 +35,38 @@
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
 
-#ifndef _UDI_COMPOSITE_CONF_H_
-#define _UDI_COMPOSITE_CONF_H_
+#ifndef _UDI_HID_KBD_CONF_H_
+#define _UDI_HID_KBD_CONF_H_
 
 /**
- * Description of Composite Device
+ * \addtogroup udi_hid_keyboard_group_single_desc
  * @{
  */
-//! USB Interfaces descriptor structure
-#define UDI_COMPOSITE_DESC_T \
-		udi_hid_kbd_desc_t udi_hid_kbd; \
-		udi_hid_generic_desc_t udi_hid_generic;
 
-#define UDI_COMPOSITE_DESC_FS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
+//! Control endpoint size
+// #define  USB_DEVICE_EP_CTRL_SIZE    8
 
-#define UDI_COMPOSITE_DESC_HS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
+//! Endpoint number used by HID keyboard interface
+#ifndef  UDI_HID_KBD_EP_IN
+#define  UDI_HID_KBD_EP_IN           (1 | USB_EP_DIR_IN)
+#endif
 
-#define UDI_COMPOSITE_API \
-		&udi_api_hid_kbd, \
-		&udi_api_hid_generic
+//! Interface number
+#ifndef UDI_HID_KBD_IFACE_NUMBER
+#define  UDI_HID_KBD_IFACE_NUMBER    0
+#endif
 
-
-// #define UDI_COMPOSITE_DESC_T
-// udi_hid_kbd_desc_t udi_hid_kbd;
-// udi_hid_generic_desc_t udi_hid_generic;
-
-// #define UDI_COMPOSITE_DESC_FS
-// .udi_hid_kbd = UDI_HID_KBD_DESC,
-// .udi_hid_generic = UDI_HID_GENERIC_DESC
-
-// #define UDI_COMPOSITE_DESC_HS UDI_COMPOSITE_DESC_FS
-
-// #define UDI_COMPOSITE_API
-// &udi_api_hid_kbd,
-// &udi_api_hid_generic
+/**
+ * \name UDD Configuration
+ */
+//@{
+//! 1 endpoint used by HID keyboard standard interface
+// #undef USB_DEVICE_MAX_EP   // undefine this definition in header file
+// #define  USB_DEVICE_MAX_EP             1
 //@}
 
-#endif // _UDI_COMPOSITE_CONF_H_
+//@}
+
+#include "udi_hid_kbd.h"
+
+#endif // _UDI_HID_KBD_CONF_H_

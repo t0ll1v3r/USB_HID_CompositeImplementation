@@ -371,6 +371,12 @@
     <Compile Include="src\76319_ui.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\common\services\usb\class\hid\device\generic\udi_hid_generic_conf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\common\services\usb\class\hid\device\kbd\udi_hid_kbd_conf.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\main.h">
       <SubType>compile</SubType>
     </Compile>

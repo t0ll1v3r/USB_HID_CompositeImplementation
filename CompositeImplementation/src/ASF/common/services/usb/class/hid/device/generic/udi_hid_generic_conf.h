@@ -1,7 +1,8 @@
 /**
  * \file
  *
- * \brief Descriptors for an USB Composite Device MSC and HID mouse
+ * \brief Default HID generic configuration for a USB Device
+ * with a single interface HID
  *
  * Copyright (c) 2009-2018 Microchip Technology Inc. and its subsidiaries.
  *
@@ -34,44 +35,54 @@
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
 
-#ifndef _UDI_COMPOSITE_CONF_H_
-#define _UDI_COMPOSITE_CONF_H_
+#ifndef _UDI_HID_GENERIC_CONF_H_
+#define _UDI_HID_GENERIC_CONF_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
- * Description of Composite Device
+ * \addtogroup udi_hid_generic_group_single_desc
  * @{
  */
-//! USB Interfaces descriptor structure
-#define UDI_COMPOSITE_DESC_T \
-		udi_hid_kbd_desc_t udi_hid_kbd; \
-		udi_hid_generic_desc_t udi_hid_generic;
 
-#define UDI_COMPOSITE_DESC_FS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
+//! Control endpoint size
+// #ifdef USB_DEVICE_HS_SUPPORT
+// #  define  USB_DEVICE_EP_CTRL_SIZE       64
+// #else
+// #  define  USB_DEVICE_EP_CTRL_SIZE       8
+// #endif
 
-#define UDI_COMPOSITE_DESC_HS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
+//! Endpoint number used by HID generic interface
+// #define  UDI_HID_GENERIC_EP_OUT   (2 | USB_EP_DIR_OUT)
 
-#define UDI_COMPOSITE_API \
-		&udi_api_hid_kbd, \
-		&udi_api_hid_generic
+#ifndef UDI_HID_GENERIC_EP_IN
+#define UDI_HID_GENERIC_EP_IN    (2 | USB_EP_DIR_IN)
+#endif
 
 
-// #define UDI_COMPOSITE_DESC_T
-// udi_hid_kbd_desc_t udi_hid_kbd;
-// udi_hid_generic_desc_t udi_hid_generic;
+//! Interface number
+#ifndef UDI_HID_GENERIC_IFACE_NUMBER
+#define  UDI_HID_GENERIC_IFACE_NUMBER     1
+#endif
 
-// #define UDI_COMPOSITE_DESC_FS
-// .udi_hid_kbd = UDI_HID_KBD_DESC,
-// .udi_hid_generic = UDI_HID_GENERIC_DESC
-
-// #define UDI_COMPOSITE_DESC_HS UDI_COMPOSITE_DESC_FS
-
-// #define UDI_COMPOSITE_API
-// &udi_api_hid_kbd,
-// &udi_api_hid_generic
+/**
+ * \name UDD Configuration
+ */
+//@{
+//! 2 endpoints used by HID generic standard interface
+// #undef USB_DEVICE_MAX_EP   // undefine this definition in header file
+// #define  USB_DEVICE_MAX_EP    1	// changed from 2 -> 1 by UniWest
 //@}
 
-#endif // _UDI_COMPOSITE_CONF_H_
+//@}
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#include "udi_hid_generic.h"
+
+#endif // _UDI_HID_GENERIC_CONF_H_

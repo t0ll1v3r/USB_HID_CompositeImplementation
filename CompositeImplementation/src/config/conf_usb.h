@@ -107,7 +107,7 @@
 //! Note:
 //! It is possible to define an IN and OUT endpoints with the same number on XMEGA product only
 //! E.g. MSC class can be have IN endpoint 0x81 and OUT endpoint 0x01
-#define  USB_DEVICE_MAX_EP             2 // 0 to max endpoint requested by interfaces
+#define  USB_DEVICE_MAX_EP             3 // 0 to max endpoint requested by interfaces
 //@}
 
 //@}
@@ -186,30 +186,6 @@
 //! Interface number
 #define  UDI_HID_GENERIC_IFACE_NUMBER    1
 //@}
-//@}
-
-
-/**
- * Description of Composite Device
- * @{
- */
-//! USB Interfaces descriptor structure
-#define UDI_COMPOSITE_DESC_T \
-		udi_hid_kbd_desc_t udi_hid_kbd; \
-		udi_hid_generic_desc_t udi_hid_generic;
-
-#define UDI_COMPOSITE_DESC_FS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
-
-#define UDI_COMPOSITE_DESC_HS \
-		.udi_hid_kbd = UDI_HID_KBD_DESC, \
-		.udi_hid_generic = UDI_HID_GENERIC_DESC
-
-#define UDI_COMPOSITE_API \
-		&udi_api_hid_kbd, \
-		&udi_api_hid_generic
-//@}
 
 
 /**
@@ -231,8 +207,13 @@
 /* Declaration of callbacks used by USB
 #include "callback_def.h"
 */
-#include "udi_hid_kbd.h"
-#include "udi_hid_generic.h"
+#include "udi_composite_conf.h"
+#include "udi_hid_kbd_conf.h"
+#include "udi_hid_generic_conf.h"
+
+
+// #include "udi_hid_kbd.h"
+// #include "udi_hid_generic.h"
 
 #include "main.h"
 #include "76319_ui.h"
