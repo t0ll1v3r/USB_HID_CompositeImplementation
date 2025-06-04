@@ -54,7 +54,6 @@ src/76319_ui.d src/76319_ui.o: ../src/76319_ui.c ../src/asf.h \
  ../src/ASF/common/services/clock/xmega/pll.h \
  ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h \
  ../src/config/conf_usb.h \
- ../src/ASF/common/services/usb/class/composite/device/udi_composite_conf.h \
  ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h \
  ../src/ASF/common/services/usb/usb_protocol.h \
  ../src/ASF/common/services/usb/usb_atmel.h \
@@ -184,8 +183,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../src/ASF/common/services/usb/class/hid/device/generic/udi_hid_generic.h:
 
 ../src/config/conf_usb.h:
-
-../src/ASF/common/services/usb/class/composite/device/udi_composite_conf.h:
 
 ../src/ASF/common/services/usb/class/hid/device/kbd/udi_hid_kbd.h:
 
