@@ -44,6 +44,7 @@ void led_statusToggle (void);
 uint8_t led_getMap(void);
 // bool led_getStateIndex(uint8_t index);
 // bool led_getStateMask(uint8_t mask);
+void led_usbTask(void);
 
 void startupSequence (uint8_t sequence);
 void testIndicator   (void);

@@ -99,6 +99,17 @@ uint8_t led_getMap(void) {
 //     return false;
 // }
 
+static uint8_t led_prevMap = 0;
+void led_usbTask(void)
+{
+    uint8_t map = led_getMap();
+    if (map != led_prevMap) {
+        if (udi_hid_led_send_report_in(&map)) {
+            led_prevMap = map;
+        }
+    }
+}
+
 /* ----------------------------- Status LED ----------------------------- */
 void led_statusOn(void) { // status LED on
     STATUS_LED_PORT.OUTCLR = LEDS_PIN;
